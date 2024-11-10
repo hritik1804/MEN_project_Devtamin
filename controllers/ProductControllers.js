@@ -23,6 +23,19 @@ const getProduct = async(req, res, next) => {
     }
 } 
 
+
+// get a single product
+const getSingleProduct = async(req, res, next) =>{
+    try {
+        const {id} = req.params;
+        const product = await Product.findById(id);
+        res.status(200).json(product);
+    } catch (error) {
+        res.status(500);
+        next(error.message);
+    }
+}
+
 const updateProduct = async(req, res, next) =>{
     try {
         const { id } = req.params;
@@ -58,6 +71,7 @@ const deleteProduct = async(req, res, next) => {
 module.exports = {
     addProduct,
     getProduct,
+    getSingleProduct,
     updateProduct,
     deleteProduct
 }
